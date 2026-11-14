@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع المواد المستعملة في الصناعة الميكانيكية - 2 تقني رياضي</title>
+    <style>
+        :root {
+            --bg-page: #e5e7eb;
+            --bg-surface: #f3f4f6;
+            --bg-card: #ffffff;
+            --slate-dark: #1f2937;
+            --slate-mid: #4b5563;
+            --accent: #0284c7;
+            --accent-soft: #e0f2fe;
+            --border: #d1d5db;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--slate-dark);
+            line-height: 1.85;
+        }
+
+        header {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            color: #ffffff;
+            padding: 2.8rem 1.5rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        .level-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.14);
+            color: #e5e7eb;
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+        }
+
+        header p.intro-lead {
+            color: #d1d5db;
+            font-size: 1.05rem;
+            max-width: 780px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .team-box {
+            background: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 1.1rem 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .prof-name {
+            color: #fbbf24;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .members-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .member-badge {
+            background: #374151;
+            border: 1px solid #6b7280;
+            color: #f9fafb;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2rem 1.2rem;
+        }
+
+        .section-heading {
+            margin: 2rem 0 1.2rem 0;
+            border-right: 5px solid var(--accent);
+            padding-right: 14px;
+        }
+
+        .section-heading h2 {
+            font-size: 1.5rem;
+            color: var(--slate-dark);
+        }
+
+        .section-heading p {
+            color: var(--slate-mid);
+            font-size: 0.95rem;
+        }
+
+        .personal-note {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .personal-note h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .engine-section {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            margin-bottom: 2.5rem;
+        }
+
+        .engine-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        @media (max-width: 850px) {
+            .engine-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-stage {
+            background: #1f2937;
+            border-radius: 14px;
+            padding: 0.8rem;
+            text-align: center;
+            border: 2px solid #4b5563;
+            position: relative;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            user-select: none;
+        }
+
+        .stage-hint {
+            color: #d1d5db;
+            font-size: 0.82rem;
+            margin-top: 6px;
+        }
+
+        .engine-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #0369a1;
+        }
+
+        .btn-gray {
+            background: #4b5563;
+        }
+
+        .btn-gray:hover {
+            background: #374151;
+        }
+
+        .parts-guide {
+            background: var(--bg-surface);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .parts-guide h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            color: var(--slate-dark);
+        }
+
+        .guide-item {
+            padding: 0.65rem 0.8rem;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-right: 4px solid var(--accent);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .guide-item:hover {
+            background: var(--accent-soft);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            color: var(--slate-dark);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: var(--slate-dark);
+            color: #fff;
+            border-color: var(--slate-dark);
+        }
+
+        .mat-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .mat-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mat-header h3 {
+            font-size: 1.3rem;
+            color: var(--slate-dark);
+        }
+
+        .norm-badge {
+            background: #e5e7eb;
+            color: #1f2937;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border: 1px solid #9ca3af;
+        }
+
+        .mat-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        @media (max-width: 720px) {
+            .mat-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mat-text-block {
+            background: var(--bg-surface);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+
+        .mat-text-block h4 {
+            color: var(--accent);
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #1f2937;
+            color: #d1d5db;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            border-top: 4px solid var(--accent);
+        }
+
+        .tree-root{background:var(--slate-dark);color:#fff;text-align:center;padding:.7rem;border-radius:10px;font-weight:800;max-width:240px;margin:0 auto 1rem}
+        .tree-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+        .tree-col{background:var(--bg-surface);border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:12px;padding:.8rem}
+        .tree-node{font-weight:800;margin-bottom:.5rem;font-size:1.05rem}
+        .tree-sub{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;margin-bottom:6px;font-size:.88rem}
+        .tree-sub b{color:var(--accent)}
+        .summary-box{margin-top:1.2rem;background:var(--accent-soft);border-right:5px solid var(--accent);border-radius:10px;padding:1rem 1.2rem}
+        .summary-box h3{margin-bottom:.4rem}
+        .summary-box li{margin-right:1.2rem;margin-bottom:4px}
+
+        .viewer { display: block; width: 100%; max-width: 440px; height: auto; margin: 1rem auto 0.3rem; background: #111827; border-radius: 12px; cursor: grab; touch-action: pan-y; }
+        .viewer:active { cursor: grabbing; }
+
+        .mat-card { border-top: 6px solid var(--c, #0284c7); }
+        .mat-header { background: linear-gradient(90deg, transparent, var(--c-soft, transparent)); }
+        .mat-header h3 { color: var(--c, #1f2937); }
+        .norm-badge { background: var(--c, #e5e7eb); color: #fff; border-color: var(--c, #9ca3af); }
+        .mat-text-block h4 { color: var(--c, #0284c7); }
+        .tree-col { border-top-color: var(--c, #0284c7); }
+        .tree-node { color: var(--c, #1f2937); }
+        .tree-sub b { color: var(--c, #0284c7); }
+        .section-heading { padding-bottom: 0.5rem; border-bottom: 4px solid transparent; border-image: linear-gradient(90deg, #3b82f6, #a855f7, #14b8a6, #f97316, #ef4444, #ec4899, #22c55e) 1; }
+        .refs-small { font-size: 0.8rem; color: #4b5563; text-align: center; margin-top: 0.6rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="level-tag">السنة الثانية ثانوي • تقني رياضي (هندسة ميكانيكية)</div>
+    <h1>المواد المستعملة في الصناعة الميكانيكية</h1>
+    <p class="intro-lead">بحث تطبيقي مبسط حول تصنيف المواد الهندسية وخصائصها، مدعوم برسم متحرك لمقطع في محرك احتراق داخلي يوضح موضع ودور كل مادة</p>
+    
+    <div class="team-box">
+        <div class="prof-name">تحت إشراف أستاذ المادة: شكري رضوان</div>
+        <div style="font-size: 0.85rem; color: #9ca3af; margin-bottom: 8px;">إعداد تلاميذ الفوج:</div>
+        <div class="members-wrap">
+            <span class="member-badge">بن العودة أسيل</span>
+            <span class="member-badge">براهيمي ماريا</span>
+            <span class="member-badge">خيدة رفيدة</span>
+            <span class="member-badge">لوناس دعاء</span>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="personal-note">
+        <h3>فكرة مشروعنا وأهميته</h3>
+        <p>
+            في حياتنا اليومية، نلاحظ أن الآلات والمحركات لا تُصنع من معدن واحد فقط، بل يختار المهندس لكل قطعة المادة التي تناسب وظيفتها وظروف عملها (مثل الحرارة العالية، الاحتكاك المستمر، أو الحاجة لخفة الوزن). في هذا المشروع، وانطلاقاً من الدرس الذي أخذناه يوم 11-11-2026، قمنا بتلخيص أهم المواد المستعملة في الصناعة الميكانيكية بأسلوب واضح وبسيط، وربطناها برسم متحرك لمحرك احتراق داخلي لنرى مكان كل مادة على أرض الواقع.
+        </p>
+    </div>
+
+    <div class="section-heading">
+        <h2>1. رسم متحرك لمقطع في محرك احتراق داخلي</h2>
+    </div>
+
+    <div class="engine-section">
+        <div class="engine-layout">
+            <div class="canvas-stage">
+                <svg id="engineSvg" viewBox="0 0 470 360" width="470" height="360" font-family="sans-serif">
+<defs>
+<linearGradient id="aluGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9ca3af"/><stop offset=".5" stop-color="#f3f4f6"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
+</defs>
+
+<g class="pt" data-p="cylinder">
+<rect x="112" y="105" width="76" height="135" fill="#0b1220" opacity=".6"/>
+<rect x="98" y="105" width="14" height="135" fill="#4b5563" stroke="#9ca3af" stroke-width="1.5"/>
+<rect x="188" y="105" width="14" height="135" fill="#4b5563" stroke="#9ca3af" stroke-width="1.5"/>
+<path d="M98 240 L80 262 L80 322 M202 240 L220 262 L220 322" fill="none" stroke="#9ca3af" stroke-width="3"/>
+</g>
+
+<g class="pt" data-p="head">
+<rect x="98" y="70" width="104" height="35" fill="url(#aluGrad)" stroke="#374151" stroke-width="1.5"/>
+<text x="150" y="92" fill="#1f2937" font-size="10.5" font-weight="bold" text-anchor="middle">رأس: ألومنيوم</text>
+</g>
+
+<g class="pt" data-p="cover">
+<rect x="104" y="52" width="92" height="18" rx="3" fill="#0284c7" stroke="#bae6fd" stroke-width="1.5"/>
+</g>
+
+<g class="pt" data-p="sump">
+<path d="M80 322 L220 322 L205 350 L95 350 Z" fill="url(#aluGrad)" stroke="#374151" stroke-width="1.5"/>
+<text x="150" y="340" fill="#1f2937" font-size="10" font-weight="bold" text-anchor="middle">حوض الزيت: ألومنيوم</text>
+</g>
+
+<g class="pt" data-p="crank">
+<circle id="cw" cx="150" cy="300" r="15" fill="#64748b" stroke="#334155" stroke-width="1.5"/>
+<line id="web" x1="150" y1="285" x2="150" y2="257" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>
+<circle id="pin2" cx="150" cy="257" r="6" fill="#475569"/>
+</g>
+
+<g class="pt" data-p="rod">
+<line id="rod" x1="150" y1="157" x2="150" y2="257" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+<line x1="150" y1="157" x2="150" y2="257" stroke="#64748b" stroke-width="1" opacity="0"/>
+<circle id="bigend" cx="150" cy="257" r="9" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+</g>
+
+<g class="pt" data-p="piston">
+<rect id="piston-body" x="113" y="135" width="74" height="40" rx="4" fill="url(#aluGrad)" stroke="#374151" stroke-width="1.8"/>
+<line id="ring-1" x1="113" y1="142" x2="187" y2="142" stroke="#4b5563" stroke-width="1.5"/>
+<line id="ring-2" x1="113" y1="148" x2="187" y2="148" stroke="#4b5563" stroke-width="1.5"/>
+<circle id="wpin" cx="150" cy="157" r="5" fill="#475569" stroke="#e5e7eb" stroke-width="1"/>
+</g>
+
+<g class="pt" data-p="bearing">
+<circle cx="150" cy="285" r="11" fill="#d97706" stroke="#fef3c7" stroke-width="1.5"/>
+<circle cx="150" cy="285" r="5" fill="#475569"/>
+</g>
+<g font-family="sans-serif"><g class="pt" data-p="cover">
+<line x1="196" y1="61" x2="285" y2="32" stroke="#ef4444" stroke-width="1.8"/>
+<circle cx="196" cy="61" r="4" fill="#ef4444"/>
+<rect x="285" y="12" width="175" height="40" rx="6" fill="#111827" stroke="#ef4444" stroke-width="1.2"/>
+<text x="372" y="29" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">اللدائن (PA66)</text>
+<text x="372" y="44" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: غطاء الصمامات</text></g><g class="pt" data-p="cylinder">
+<line x1="202" y1="120" x2="285" y2="86" stroke="#a855f7" stroke-width="1.8"/>
+<circle cx="202" cy="120" r="4" fill="#a855f7"/>
+<rect x="285" y="66" width="175" height="40" rx="6" fill="#111827" stroke="#a855f7" stroke-width="1.2"/>
+<text x="372" y="83" fill="#a855f7" font-size="12" font-weight="bold" text-anchor="middle">الزهر الرمادي (EN-GJL-250)</text>
+<text x="372" y="98" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: كتلة الأسطوانات</text></g><g class="pt" data-p="piston">
+<line id="lp-line" x1="187" y1="145" x2="285" y2="140" stroke="#14b8a6" stroke-width="1.8"/>
+<circle id="lp-dot" cx="187" cy="145" r="4" fill="#14b8a6"/>
+<rect x="285" y="120" width="175" height="40" rx="6" fill="#111827" stroke="#14b8a6" stroke-width="1.2"/>
+<text x="372" y="137" fill="#14b8a6" font-size="12" font-weight="bold" text-anchor="middle">خليط الألومنيوم (AlSi12)</text>
+<text x="372" y="152" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: المكبس</text></g><g class="pt" data-p="rod">
+<line id="lr-line" x1="150" y1="207" x2="285" y2="194" stroke="#3b82f6" stroke-width="1.8"/>
+<circle id="lr-dot" cx="150" cy="207" r="4" fill="#3b82f6"/>
+<rect x="285" y="174" width="175" height="40" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.2"/>
+<text x="372" y="191" fill="#3b82f6" font-size="12" font-weight="bold" text-anchor="middle">الفولاذ الممزوج (35CrMo4)</text>
+<text x="372" y="206" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: ذراع التوصيل</text></g><g class="pt" data-p="bearing">
+<line x1="158" y1="293" x2="285" y2="248" stroke="#f97316" stroke-width="1.8"/>
+<circle cx="158" cy="293" r="4" fill="#f97316"/>
+<rect x="285" y="228" width="175" height="40" rx="6" fill="#111827" stroke="#f97316" stroke-width="1.2"/>
+<text x="372" y="245" fill="#f97316" font-size="12" font-weight="bold" text-anchor="middle">البرونز (CuSn8)</text>
+<text x="372" y="260" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: وسادة عمود المرفق</text></g><g class="pt" data-p="crank">
+<line id="lc-line" x1="150" y1="300" x2="285" y2="302" stroke="#3b82f6" stroke-width="1.8"/>
+<circle id="lc-dot" cx="150" cy="300" r="4" fill="#3b82f6"/>
+<rect x="285" y="282" width="175" height="40" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.2"/>
+<text x="372" y="299" fill="#3b82f6" font-size="12" font-weight="bold" text-anchor="middle">الفولاذ الكربوني (C45)</text>
+<text x="372" y="314" fill="#d1d5db" font-size="10.5" text-anchor="middle">القطعة: عمود المرفق</text></g></g>
+</svg>
+                <div class="engine-controls">
+                    <button class="btn" id="btnToggle" onclick="toggleEngine()">⏸ إيقاف المحرك</button>
+                    <label style="color:#e5e7eb;font-size:.85rem;display:flex;align-items:center;gap:6px">السرعة <input type="range" min="0.2" max="3" step="0.1" value="1" oninput="speed=+this.value"></label>
+                </div>
+            </div>
+
+            <div class="parts-guide">
+                <h3>دليل الأسهم الموضحة على المحرك:</h3>
+                <div class="guide-item" onclick="highlightPart('cylinder')">
+                    <strong>1. الزهر الرمادي (EN-GJL-250):</strong> يُستعمل في الأسطوانة لمقاومة احتكاك المكبس وامتصاص الاهتزازات.
+                </div>
+                <div class="guide-item" onclick="highlightPart('piston')">
+                    <strong>2. خليط الألومنيوم (AlSi12):</strong> يُستعمل في المكبس لخفة وزنه وسرعة تبديده لحرارة الاحتراق.
+                </div>
+                <div class="guide-item" onclick="highlightPart('rod')">
+                    <strong>3. الفولاذ الممزوج (35CrMo4):</strong> يُستعمل في ذراع التوصيل لتحمل قوة الانفجار والضغط دون أن ينكسر.
+                </div>
+                <div class="guide-item" onclick="highlightPart('bearing')">
+                    <strong>4. البرونز (CuSn8):</strong> يُستعمل في وسادة المحور لتقليل الاحتكاك وحماية عمود المرفق من التآكل.
+                </div>
+                <div class="guide-item" onclick="highlightPart('crank')">
+                    <strong>5. الفولاذ الكربوني (C45):</strong> يُستعمل في عمود المرفق لمقاومة إجهادات الالتواء المستمرة.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-heading">
+        <h2>2. تصنيف المواد المستعملة وخصائصها</h2>
+        <p>شرح مبسط ومفصل لكل عائلة من المواد، خصائصها، فوائدها، وتعيينها المعياري</p>
+    </div>
+
+    <div class="filter-row">
+        <button class="filter-btn active" onclick="filterMaterials('all', this)">عرض جميع المواد</button>
+        <button class="filter-btn" style="border-bottom:4px solid #3b82f6" onclick="filterMaterials('ferrous', this)">المعادن الحديدية (فولاذ وزهر)</button>
+        <button class="filter-btn" style="border-bottom:4px solid #14b8a6" onclick="filterMaterials('nonferrous', this)">المعادن غير الحديدية (ألومنيوم ونحاس)</button>
+        <button class="filter-btn" style="border-bottom:4px solid #ef4444" onclick="filterMaterials('plastic', this)">اللدائن (البلاستيك)</button>
+        <button class="filter-btn" style="border-bottom:4px solid #ec4899" onclick="filterMaterials('ceramic', this)">الخزف</button>
+        <button class="filter-btn" style="border-bottom:4px solid #22c55e" onclick="filterMaterials('composite', this)">المواد المركّبة</button>
+    </div>
+
+    <div class="mat-card" style="--c:#3b82f6" data-group="ferrous">
+        <div class="mat-header">
+            <h3>أولاً: الفولاذ (Les Aciers) - غير الممزوج والممزوج</h3>
+            <span class="norm-badge">أمثلة التعيين: C45 / 35CrMo4</span>
+        </div>
+        <div class="mat-body">
+            <div class="mat-text-block">
+                <h4>ما هو الفولاذ وكيف يتكون؟</h4>
+                <p>
+                    الفولاذ هو خليط معدني يتكون أساساً من <strong>الحديد (Fe)</strong> ونسبة قليلة من <strong>الكربون (C) تقل عن 2%</strong>. نميز فيه بين نوعين: <strong>فولاذ غير ممزوج</strong> (يحتوي على الحديد والكربون فقط مثل C45)، و<strong>فولاذ ممزوج</strong> نضيف له عناصر أخرى مثل الكروم والموليبدينوم (مثل 35CrMo4) لجعله أقوى وأكثر تحملاً للظروف الصعبة.
+                </p>
+            </div>
+            <div class="mat-text-block">
+                <h4>خصائصه وفوائده وأماكن استعماله:</h4>
+                <p>
+                    يمتاز الفولاذ بصلابته العالية، وقدرته الكبيرة على تحمل قوى الشد والالتواء والصدمات دون أن ينكسر، كما يمكن تقسيته بالحرارة (المعالجة الحرارية). لذلك نستخدمه بكثرة في صناعة القطع التي تتعرض لجهد كبير مثل: <strong>عمود المرفق، ذراع التوصيل، المسننات، الأعمدة الدوارة، والبراغي</strong>.
+                </p>
+            </div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="bridge" data-tag="steel" data-label="الفولاذ"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#a855f7" data-group="ferrous">
+        <div class="mat-header">
+            <h3>ثانياً: الزهر (Les Fontes) - الرمادي والكروي</h3>
+            <span class="norm-badge">أمثلة التعيين: EN-GJL-250 / EN-GJS-400</span>
+        </div>
+        <div class="mat-body">
+            <div class="mat-text-block">
+                <h4>ما هو الزهر وكيف يتكون؟</h4>
+                <p>
+                    الزهر هو أيضاً خليط من <strong>الحديد والكربون</strong>، لكن نسبة الكربون فيه تكون <strong>أكبر من 2%</strong> (نظرياً حتى 6.67%، وعملياً لا تتجاوز غالباً 4.5%). هذه الزيادة في الكربون تجعله ينصهر بسهولة ويسيل جيداً عند تسخينه، مما يسمح بصبه في قوالب لصناعة أشكال معقدة يصعب صنعها بالفولاذ.
+                </p>
+            </div>
+            <div class="mat-text-block">
+                <h4>خصائصه وفوائده وأماكن استعماله:</h4>
+                <p>
+                    يتميز الزهر بسهولة القولبة، ومقاومته الممتازة للاحتكاك (لأن الكربون الموجود فيه على شكل غرافيت يعمل كمزلق طبيعي)، كما أنه يمتص الاهتزازات والضجيج بشكل رائع. نجده بكثرة في <strong>كتلة أسطوانات المحرك، حدافة الموازنة، وهياكل الآلات الثقيلة في الورشات</strong>.
+                </p>
+            </div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="block" data-tag="cast" data-label="الزهر الرمادي"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#14b8a6" data-group="nonferrous">
+        <div class="mat-header">
+            <h3>ثالثاً: الألومنيوم وخلائطه (Alliages d'Aluminium)</h3>
+            <span class="norm-badge">أمثلة التعيين: AlSi12 / AlCu4Mg</span>
+        </div>
+        <div class="mat-body">
+            <div class="mat-text-block">
+                <h4>ما هو الألومنيوم وخلائطه؟</h4>
+                <p>
+                    الألومنيوم معدن أبيض فضي ينتمي للمعادن غير الحديدية الخفيفة، فهو <strong>أخف من الفولاذ بثلاث مرات تقريباً</strong>. ولأنه لين في حالته النقية، نقوم بمزجه مع معادن أخرى مثل <strong>السيليسيوم (Si)</strong> لتسهيل قولبته، أو <strong>النحاس (Cu)</strong> لزيادة صلابته.
+                </p>
+            </div>
+            <div class="mat-text-block">
+                <h4>خصائصه وفوائده وأماكن استعماله:</h4>
+                <p>
+                    أهم فائدة للألومنيوم هي خفة وزنه التي تقلل من ثقل القطع المتحركة وتوفر الوقود، بالإضافة إلى أنه ينقل الحرارة بسرعة كبيرة ويقاوم التآكل لأنه يكوّن طبقة أكسيد واقية على سطحه. لذلك نصنع منه <strong>مكبس المحرك (Piston)، رأس الأسطوانة (Culasse)، حوض الزيت، وهياكل الطائرات</strong>.
+                </p>
+            </div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="plane" data-tag="alu" data-label="الألومنيوم"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#f97316" data-group="nonferrous">
+        <div class="mat-header">
+            <h3>رابعاً: النحاس وخلائطه (البرونز والنحاس الأصفر)</h3>
+            <span class="norm-badge">أمثلة التعيين: CuSn8 / CuZn39Pb2</span>
+        </div>
+        <div class="mat-body">
+            <div class="mat-text-block">
+                <h4>ما هي خلائط النحاس؟</h4>
+                <p>
+                    النحاس معدن أحمر مرن وناقل ممتاز للكهرباء والحرارة. في الصناعة الميكانيكية نستخدم خليطين مشهورين له: <strong>البرونز (Bronze)</strong> وهو خليط النحاس مع القصدير (مثل CuSn8)، و<strong>النحاس الأصفر (Laiton)</strong> وهو خليط النحاس مع الزنك (مثل CuZn39Pb2).
+                </p>
+            </div>
+            <div class="mat-text-block">
+                <h4>خصائصه وفوائده وأماكن استعماله:</h4>
+                <p>
+                    البرونز يمتاز بأن احتكاكه مع الفولاذ ضعيف، وهو أليَن منه، فإذا حدث تآكل فإنه يصيب الوسادة (الرخيصة وسهلة التبديل) وليس العمود الفولاذي الغالي، كما أنه يقاوم التآكل الكيميائي. لذلك نستعمله في <strong>الوسادات ومحامل الانزلاق (Coussinets)، المسننات الدودية، وفواصل الكتامة النحاسية</strong>.
+                </p>
+            </div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="pipes" data-tag="cu" data-label="النحاس والبرونز"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#ef4444" data-group="plastic">
+        <div class="mat-header">
+            <h3>خامساً: اللدائن والمطاط الصناعي (Les Plastiques)</h3>
+            <span class="norm-badge">أمثلة التعيين: PA66 / PVC / PTFE</span>
+        </div>
+        <div class="mat-body">
+            <div class="mat-text-block">
+                <h4>ما هي اللدائن؟</h4>
+                <p>
+                    اللدائن (البلاستيك) هي مواد عضوية مصنعة تُستخرج غالباً من مشتقات البترول، وتتكون من سلاسل جزيئية طويلة تسمى البوليمرات. تنقسم إلى لدائن حرارية تذوب بالحرارة ويمكن إعادة تشكيلها، ولدائن متصلدة بالحرارة تحافظ على شكلها.
+                </p>
+            </div>
+            <div class="mat-text-block">
+                <h4>خصائصه وفوائده وأماكن استعماله:</h4>
+                <p>
+                    تتميز اللدائن بخفة وزنها الشديدة، وعزلها الجيد للكهرباء والحرارة، ومرونتها العالية، ومقاومتها للزيوت والمواد الكيميائية. نجدها في <strong>غطاء الصمامات العلوي في المحرك، أنابيب سحب الهواء، وبعض الفواصل والأختام (تُصنع غالباً من المطاط الصناعي)</strong>.
+                </p>
+            </div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="car" data-tag="plastic" data-label="اللدائن والمطاط"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#ec4899" data-group="ceramic">
+        <div class="mat-header"><h3>سادساً: الخزف (Les Céramiques)</h3><span class="norm-badge">أمثلة: الطين / الكاولين / الألومين Al₂O₃</span></div>
+        <div class="mat-body">
+            <div class="mat-text-block"><h4>ما هو الخزف؟</h4><p>الخزف مواد <strong>غير معدنية وغير عضوية</strong> تُشكَّل ثم تُحرق في درجات حرارة عالية. نميز بين <strong>الخزف التقليدي</strong> (من الطين والكاولين، مثل الآجر والأواني) و<strong>الخزف الصناعي</strong> (مثل الألومين Al₂O₃ وكربيد السيليسيوم SiC) المخصص للتطبيقات التقنية.</p></div>
+            <div class="mat-text-block"><h4>خصائصه وأماكن استعماله:</h4><p>يتميز بصلابة عالية ومقاومة كبيرة للحرارة والتآكل وعزل كهربائي جيد، لكنه <strong>هش</strong> ينكسر بالصدمات. نجده في المحرك في <strong>عازل شمعة الإشعال</strong> (ألومين)، وفي أقراص الفرامل الخزفية وأدوات القطع.</p></div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="plug" data-tag="ceramic" data-label="الخزف"></canvas>
+    </div>
+
+    <div class="mat-card" style="--c:#22c55e" data-group="composite">
+        <div class="mat-header"><h3>سابعاً: المواد المركّبة (Les Composites)</h3><span class="norm-badge">أمثلة: ألياف الزجاج + راتنج / ألياف الكربون + إيبوكسي</span></div>
+        <div class="mat-body">
+            <div class="mat-text-block"><h4>ما هي المادة المركّبة؟</h4><p>تتكوّن من مادتين أو أكثر غير متجانستين: عنصر رابط يسمى <strong>الأساس (Matrice)</strong> وعنصر داعم يسمى <strong>التسليح (Renfort)</strong> يقوّيه، فتجمع خصائص لا تتوفر في مادة واحدة.</p></div>
+            <div class="mat-text-block"><h4>خصائصها وأماكن استعمالها:</h4><p>تتميز بخفة الوزن مع مقاومة ميكانيكية عالية ومقاومة للتآكل. تُستعمل في <strong>هياكل الطائرات والسيارات والدراجات، وشفرات توربينات الرياح، وخزانات الضغط</strong>.</p></div>
+        </div>
+        <canvas class="viewer" width="440" height="270" data-model="wind" data-tag="comp" data-label="المواد المركّبة"></canvas>
+    </div>
+
+    <div class="section-heading">
+        <h2>3. ملخص الدرس: تصنيف المواد</h2>
+        <p>انطلاقاً من نشاط الكتاب المدرسي (ص 79) وحصة يوم 11-11-2026</p>
+    </div>
+
+    <div class="personal-note">
+        <div class="tree-root">المواد</div>
+        <div class="tree-row">
+            <div class="tree-col" style="--c:#3b82f6"><div class="tree-node">المعادن</div>
+                <div class="tree-sub"><b>حديدية وغير حديدية</b></div>
+                <div class="tree-sub">الحديد، الكربون، الألمنيوم، النحاس، الزنك، المغنيزيوم</div></div>
+            <div class="tree-col" style="--c:#ef4444"><div class="tree-node">اللدائن</div>
+                <div class="tree-sub"><b>بوليمرات:</b> لدائن حرارية، لدائن متصلدة</div>
+                <div class="tree-sub"><b>مطاط:</b> طبيعي أو مصنَّع</div></div>
+            <div class="tree-col" style="--c:#ec4899"><div class="tree-node">الخزف</div>
+                <div class="tree-sub"><b>تقليدي:</b> الطين، الكاولين</div>
+                <div class="tree-sub"><b>صناعي</b></div></div>
+            <div class="tree-col" style="--c:#22c55e"><div class="tree-node">المركّبات</div>
+                <div class="tree-sub">مواد غير متجانسة متكونة من عنصر رابط وعنصر داعم</div></div>
+        </div>
+        <div class="summary-box">
+            <h3>الخلاصة</h3>
+            <ul>
+                <li>تصنف المواد إلى: المعادن، اللدائن، الخزف، والمركّبات.</li>
+                <li>المواد المستعملة لإنجاز المنتجات متعددة ومتنوعة ولا يتم اختيارها جزافاً.</li>
+                <li>الخصائص التي نختار على أساسها المادة هي أساساً: الخصائص الميكانيكية، الفيزيائية، الكيميائية، التكنولوجية، والعوامل الاقتصادية.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-heading">
+        <h2>4. المحرك وموادّه</h2>
+    </div>
+    <div class="personal-note">
+        <canvas class="viewer" data-model="motor" data-tag="all" width="480" height="380" style="max-width: 620px;"></canvas>
+        <p class="refs-small">المراجع: الاستعانة بالكتاب المدرسي للسنة الثانية ثانوي (تقني رياضي) ص 79 • الاستعانة ببعض معلومات الدرس الذي أخذناه يوم 11-11-2026 • الاستعانة بأداة ذكاء اصطناعي في جمع المعلومات وتصميم الصفحة</p>
+    </div>
+
+</div>
+
+<footer>
+    مشروع مادة الهندسة الميكانيكية • السنة الثانية ثانوي (2 تقني رياضي)<br>
+    تحت إشراف الأستاذ: شكري رضوان | إعداد التلاميذ: بن العودة أسيل، براهيمي ماريا، خيدة رفيدة، لوناس دعاء
+</footer>
+
+<script>
+    let angle = 0, engineRunning = true, speed = 1, sel = 'all';
+    const CX = 150, CY = 285, R = 28, L = 100;
+    const $ = id => document.getElementById(id);
+    function set(id, o) { const e = $(id); for (const k in o) e.setAttribute(k, o[k]); }
+
+    function toggleEngine() {
+        engineRunning = !engineRunning;
+        $('btnToggle').textContent = engineRunning ? '⏸ إيقاف المحرك' : '▶ تشغيل المحرك';
+    }
+
+    function highlightPart(p) {
+        sel = (sel === p) ? 'all' : p;
+        document.querySelectorAll('#engineSvg .pt').forEach(g => {
+            g.style.transition = 'opacity .2s';
+            g.style.opacity = (sel === 'all' || g.dataset.p === sel) ? 1 : 0.18;
+        });
+    }
+
+    function updateEngine() {
+        const px = CX + R * Math.sin(angle), py = CY - R * Math.cos(angle);
+        const pinY = py - Math.sqrt(L * L - (px - CX) * (px - CX));
+        const top = pinY - 22;
+        set('piston-body', { y: top });
+        set('ring-1', { y1: top + 7, y2: top + 7 });
+        set('ring-2', { y1: top + 13, y2: top + 13 });
+        set('wpin', { cy: pinY });
+        set('rod', { x1: CX, y1: pinY, x2: px, y2: py });
+        set('bigend', { cx: px, cy: py });
+        set('web', { x2: px, y2: py });
+        set('pin2', { cx: px, cy: py });
+        const qx = CX - 0.6 * (px - CX), qy = CY - 0.6 * (py - CY);
+        set('cw', { cx: qx, cy: qy });
+        set('lp-line', { y1: top + 10 }); set('lp-dot', { cy: top + 10 });
+        const mx = (CX + px) / 2, my = (pinY + py) / 2;
+        set('lr-line', { x1: mx, y1: my }); set('lr-dot', { cx: mx, cy: my });
+        set('lc-line', { x1: qx, y1: qy }); set('lc-dot', { cx: qx, cy: qy });
+    }
+
+    setInterval(() => {
+        if (engineRunning) { angle += 0.07 * speed; updateEngine(); }
+    }, 30);
+    updateEngine();
+
+    function filterMaterials(group, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.mat-card').forEach(card => {
+            card.style.display = (group === 'all' || card.getAttribute('data-group') === group) ? 'block' : 'none';
+        });
+    }
+
+
+    var STEEL=[148,163,184], ALU=[203,213,225], CAST=[100,116,139], COPPER=[217,119,6], BRASS=[234,179,8],
+        PLASTIC=[239,68,68], BLACK=[30,41,59], WHITE=[226,232,240], DIM=[59,74,99];
+
+    function box(p, s, c, t, rz, l) {
+        rz = rz || 0; l = l || [0,0,0];
+        var h = s.map(function(v){ return v/2; }), v = [];
+        [-1,1].forEach(function(a){ [-1,1].forEach(function(b){ [-1,1].forEach(function(d){
+            var x = a*h[0]+l[0], y = b*h[1]+l[1], z = d*h[2]+l[2];
+            v.push([x*Math.cos(rz)-y*Math.sin(rz)+p[0], x*Math.sin(rz)+y*Math.cos(rz)+p[1], z+p[2]]);
+        }); }); });
+        return [[0,1,3,2],[4,5,7,6],[0,1,5,4],[2,3,7,6],[0,2,6,4],[1,3,7,5]].map(function(q){
+            return {p: q.map(function(i){ return v[i]; }), c: c, t: t};
+        });
+    }
+
+    function cyl(p, r, h, axis, c, t, n) {
+        n = n || 14;
+        var ring = [], i, out = [];
+        function m(x, y, z) {
+            var q = axis == 'x' ? [y,x,z] : axis == 'z' ? [x,z,y] : [x,y,z];
+            return [q[0]+p[0], q[1]+p[1], q[2]+p[2]];
+        }
+        for (i = 0; i < n; i++) {
+            var a = i/n*Math.PI*2;
+            ring.push([r*Math.cos(a), r*Math.sin(a)]);
+        }
+        for (i = 0; i < n; i++) {
+            var u = ring[i], w = ring[(i+1)%n];
+            out.push({p: [m(u[0],-h/2,u[1]), m(w[0],-h/2,w[1]), m(w[0],h/2,w[1]), m(u[0],h/2,u[1])], c: c, t: t});
+        }
+        out.push({p: ring.map(function(u){ return m(u[0],h/2,u[1]); }), c: c, t: t});
+        out.push({p: ring.map(function(u){ return m(u[0],-h/2,u[1]); }), c: c, t: t});
+        return out;
+    }
+
+    var MODELS = {
+        bridge: function() {
+            var f = box([0,0,0],[8,0.3,1.6],STEEL,'steel');
+            [-2.6,2.6].forEach(function(x){
+                f = f.concat(box([x,-0.9,0],[0.9,1.5,2.2],CAST,'other'));
+                [-0.9,0.9].forEach(function(z){ f = f.concat(box([x,1.1,z],[0.3,2.4,0.3],STEEL,'steel')); });
+                f = f.concat(box([x,2.3,0],[0.3,0.3,2.1],STEEL,'steel'));
+            });
+            return f;
+        },
+        block: function() {
+            return box([0,0,0],[4.4,1.8,2],CAST,'cast')
+              .concat(box([0,1.15,0],[4.4,0.5,2],ALU,'alu'))
+              .concat(box([0,-1.1,0],[4.8,0.5,2.4],ALU,'alu'))
+              .concat(cyl([0,1.7,0],0.3,0.6,'y',BLACK,'other'));
+        },
+        plane: function() {
+            return cyl([0,0,0],0.55,6,'x',ALU,'alu',16)
+              .concat(box([0.3,-0.1,0],[1.2,0.1,7],ALU,'alu'))
+              .concat(box([-2.6,0.8,0],[0.9,1.1,0.1],ALU,'alu'))
+              .concat(box([-2.6,0.2,0],[0.6,0.08,2.2],ALU,'alu'))
+              .concat(cyl([0.6,-0.5,1.8],0.28,1.2,'x',BLACK,'other'))
+              .concat(cyl([0.6,-0.5,-1.8],0.28,1.2,'x',BLACK,'other'));
+        },
+        pipes: function() {
+            return cyl([0,0,0],0.25,5,'x',COPPER,'cu')
+              .concat(cyl([2.5,1.2,0],0.25,2.4,'y',COPPER,'cu'))
+              .concat(cyl([1.25,2.4,0],0.25,2.5,'x',COPPER,'cu'))
+              .concat(box([-1,0,0],[0.5,0.7,0.7],BRASS,'cu'))
+              .concat(box([0,-0.5,0],[5.4,0.1,1],CAST,'other'));
+        },
+        car: function() {
+            var f = box([0,0.2,0],[4,0.8,1.8],STEEL,'steel')
+              .concat(box([-0.2,0.85,0],[2,0.7,1.6],STEEL,'steel'))
+              .concat(box([2.05,0,0],[0.25,0.45,1.9],PLASTIC,'plastic'))
+              .concat(box([-2.05,0,0],[0.25,0.45,1.9],PLASTIC,'plastic'));
+            [-1.2,1.2].forEach(function(x){ [-0.95,0.95].forEach(function(z){
+                f = f.concat(cyl([x,-0.3,z],0.45,0.35,'z',BLACK,'plastic'));
+            }); });
+            return f;
+        },
+        plug: function() {
+            return cyl([0,1.2,0],0.55,2.2,'y',WHITE,'ceramic')
+              .concat(cyl([0,-0.3,0],0.8,0.6,'y',STEEL,'metal',6))
+              .concat(cyl([0,-1.1,0],0.45,1,'y',STEEL,'metal'))
+              .concat(cyl([0,2.6,0],0.15,0.6,'y',STEEL,'metal'));
+        },
+        motor: function() {
+            var f = box([0,0,0],[4.4,1.8,2],0,'cast')
+              .concat(box([0,1.15,0],[4.4,0.5,2],0,'alu'))
+              .concat(box([0,-1.15,0],[4.8,0.5,2.4],0,'alu'))
+              .concat(box([0,1.65,0],[3.6,0.35,1.5],0,'plastic'))
+              .concat(cyl([0,0.4,-1.2],0.14,4,'x',0,'cu',8))
+              .concat(cyl([-2.55,-0.5,0],0.45,0.3,'x',0,'cu'))
+              .concat(box([-2.3,0,0],[0.12,1.6,1.8],0,'comp'))
+              .concat(cyl([-2.6,-0.5,0],0.2,0.9,'x',0,'steel',8));
+            [-1.65,-0.55,0.55,1.65].forEach(function(x){ f = f.concat(cyl([x,1.75,0.95],0.13,0.7,'y',0,'ceramic',8)); });
+            var sp = cyl([2.7,-0.5,0],0.95,0.25,'x',0,'steel',20).concat(cyl([2.4,-0.5,0],0.2,0.4,'x',0,'steel',8));
+            for (var i = 0; i < 8; i++) {
+                var a = i*Math.PI/4;
+                box([2.7,-0.5+1.0*Math.cos(a),1.0*Math.sin(a)],[0.25,0.18,0.18],0,'steel').forEach(function(fc){ fc.o = [147,197,253]; sp.push(fc); });
+            }
+            sp.forEach(function(fc){ fc.rx = [-0.5,0]; });
+            return f.concat(sp);
+        },
+        wind: function() {
+            var f = cyl([0,-0.2,0],0.25,4,'y',STEEL,'other').concat(box([0,1.9,0.2],[0.7,0.6,1.2],STEEL,'other'));
+            [0, 2.09, 4.19].forEach(function(a){ f = f.concat(box([0,1.9,0.75],[0.35,2.4,0.08],WHITE,'comp',a,[0,1.2,0])); });
+            return f;
+        }
+    };
+
+    var COLH = {steel:'#3b82f6', cast:'#a855f7', alu:'#14b8a6', cu:'#f97316', plastic:'#ef4444', ceramic:'#ec4899', comp:'#22c55e'};
+    var NAMES = {steel:'الفولاذ', cast:'الزهر', alu:'الألومنيوم', cu:'النحاس والبرونز', plastic:'اللدائن', ceramic:'الخزف', comp:'المركّبات'};
+    function hex2rgb(h) { return [1,3,5].map(function(i){ return parseInt(h.substr(i,2), 16); }); }
+
+    function startViewer(cv) {
+        var g = cv.getContext('2d'), W = cv.width, H = cv.height;
+        var faces = MODELS[cv.dataset.model](), all = cv.dataset.tag == 'all', hi = cv.dataset.tag;
+        var tags = all ? Object.keys(COLH) : [hi];
+        var yaw = 0.6, pitch = 0.3, spin = 0, drag = false, lx = 0, ly = 0, visible = false;
+
+        var mn = [1e9,1e9,1e9], mx = [-1e9,-1e9,-1e9];
+        faces.forEach(function(fc){ fc.p.forEach(function(q){ for (var i = 0; i < 3; i++) { mn[i] = Math.min(mn[i], q[i]); mx[i] = Math.max(mx[i], q[i]); } }); });
+        var ctr = [0,1,2].map(function(i){ return (mn[i]+mx[i])/2; });
+        var rad = Math.sqrt(Math.pow(mx[0]-mn[0],2)+Math.pow(mx[1]-mn[1],2)+Math.pow(mx[2]-mn[2],2))/2;
+        var sc = (all ? 3.2 : 3)/rad;
+
+        function turn(q, fc) {
+            var x = q[0], y = q[1], z = q[2];
+            if (fc && fc.rx) {
+                var yy = y-fc.rx[0], zz = z-fc.rx[1];
+                y = fc.rx[0]+yy*Math.cos(spin)-zz*Math.sin(spin);
+                z = fc.rx[1]+yy*Math.sin(spin)+zz*Math.cos(spin);
+            }
+            x = (x-ctr[0])*sc; y = (y-ctr[1])*sc; z = (z-ctr[2])*sc;
+            var x1 = x*Math.cos(yaw)+z*Math.sin(yaw), z1 = -x*Math.sin(yaw)+z*Math.cos(yaw);
+            return [x1, y*Math.cos(pitch)-z1*Math.sin(pitch), y*Math.sin(pitch)+z1*Math.cos(pitch)];
+        }
+        function flat(q) { var k = 400/(10-q[2]); return [W/2+q[0]*k, H/2-q[1]*k]; }
+        function rgb(c, k) { return 'rgb('+Math.round(c[0]*k)+','+Math.round(c[1]*k)+','+Math.round(c[2]*k)+')'; }
+
+        var cents = [];
+        tags.forEach(function(t){
+            var pts = [];
+            faces.forEach(function(fc){ if (fc.t == t && !fc.o) fc.p.forEach(function(q){ pts.push(q); }); });
+            if (pts.length) cents.push({t: t, c: [0,1,2].map(function(i){ return pts.reduce(function(a,q){ return a+q[i]; }, 0)/pts.length; })});
+        });
+
+        function arrow(a, b, color) {
+            g.strokeStyle = color; g.fillStyle = color; g.lineWidth = 2.5;
+            g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+            var r = Math.atan2(b[1]-a[1], b[0]-a[0]);
+            g.beginPath(); g.moveTo(b[0], b[1]);
+            g.lineTo(b[0]-12*Math.cos(r-0.4), b[1]-12*Math.sin(r-0.4));
+            g.lineTo(b[0]-12*Math.cos(r+0.4), b[1]-12*Math.sin(r+0.4)); g.closePath(); g.fill();
+        }
+        function tag(text, x, y, color) {
+            g.font = 'bold 15px sans-serif'; g.textAlign = 'center';
+            var w = g.measureText(text).width+16;
+            g.fillStyle = color; g.fillRect(x-w/2, y-22, w, 24);
+            g.fillStyle = '#fff'; g.fillText(text, x, y-5);
+            return w;
+        }
+
+        function draw() {
+            g.clearRect(0, 0, W, H);
+            var list = faces.map(function(fc){
+                var pts = fc.p.map(function(q){ return turn(q, fc); });
+                var d = pts.reduce(function(a,q){ return a+q[2]; }, 0)/pts.length;
+                var u = [pts[1][0]-pts[0][0], pts[1][1]-pts[0][1], pts[1][2]-pts[0][2]];
+                var v = [pts[2][0]-pts[0][0], pts[2][1]-pts[0][1], pts[2][2]-pts[0][2]];
+                var n = [u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]];
+                var len = Math.sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]) || 1;
+                var light = Math.abs((n[0]*0.3+n[1]*0.6+n[2]*0.7)/len);
+                var base = fc.o || ((all || fc.t == hi) && COLH[fc.t] ? hex2rgb(COLH[fc.t]) : [59,74,99]);
+                return {pts: pts, d: d, k: 0.55+0.45*light, c: base};
+            });
+            list.sort(function(a,b){ return a.d-b.d; });
+            list.forEach(function(o){
+                g.beginPath();
+                o.pts.forEach(function(q,i){ var p = flat(q); if (i) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); });
+                g.closePath();
+                g.fillStyle = rgb(o.c, o.k); g.fill();
+                g.strokeStyle = 'rgba(15,23,42,0.5)'; g.lineWidth = 0.6; g.stroke();
+            });
+            var items = cents.map(function(e){ return {tip: flat(turn(e.c)), color: COLH[e.t], text: all ? NAMES[e.t] : cv.dataset.label}; });
+            if (!all) {
+                var it = items[0], tx = it.tip[0] < W/2 ? it.tip[0]+70 : it.tip[0]-70, ty = Math.max(30, it.tip[1]-55);
+                arrow([tx, ty], it.tip, it.color);
+                var w = g.measureText(it.text).width+16;
+                tag(it.text, Math.min(W-w/2-4, Math.max(w/2+4, tx)), ty, it.color);
+                return;
+            }
+            [true, false].forEach(function(left){
+                var side = items.filter(function(it){ return (it.tip[0] < W/2) == left; }).sort(function(a,b){ return a.tip[1]-b.tip[1]; });
+                side.forEach(function(it, i){
+                    var ty = 30+i*(H-60)/Math.max(side.length, 3);
+                    g.font = 'bold 15px sans-serif';
+                    var w = g.measureText(it.text).width+16, x = left ? 6+w/2 : W-6-w/2;
+                    arrow([left ? 6+w : W-6-w, ty-10], it.tip, it.color);
+                    tag(it.text, x, ty, it.color);
+                });
+            });
+        }
+
+        cv.addEventListener('pointerdown', function(e){ drag = true; lx = e.clientX; ly = e.clientY; cv.setPointerCapture(e.pointerId); });
+        cv.addEventListener('pointermove', function(e){
+            if (!drag) return;
+            yaw += (e.clientX-lx)*0.01; pitch = Math.max(-1.2, Math.min(1.2, pitch+(e.clientY-ly)*0.01));
+            lx = e.clientX; ly = e.clientY;
+        });
+        cv.addEventListener('pointerup', function(){ drag = false; });
+        cv.addEventListener('pointercancel', function(){ drag = false; });
+        new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(cv);
+
+        function loop() {
+            if (visible) { if (!drag) yaw += all ? 0.005 : 0.008; spin += 0.08; draw(); }
+            requestAnimationFrame(loop);
+        }
+        loop();
+    }
+    document.querySelectorAll('.viewer').forEach(startViewer);
+</script>
+
+</body>
+</html>
